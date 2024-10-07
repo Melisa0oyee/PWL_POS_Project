@@ -6,53 +6,25 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PenjualanDetailSeeder extends Seeder
+class PenjualanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('t_penjualan_detail')->insert([
-            ['detail_id' => 1, 'penjualan_id' => 1, 'barang_id' => 1, 'harga' => 50000, 'jumlah' => 2],
-            ['detail_id' => 2, 'penjualan_id' => 1, 'barang_id' => 2, 'harga' => 30000, 'jumlah' => 1],
-            ['detail_id' => 3, 'penjualan_id' => 1, 'barang_id' => 3, 'harga' => 45000, 'jumlah' => 3],
+        DB::table('t_penjualan')->insert([
+            ['penjualan_id' => 1, 'user_id' => 1, 'pembeli' => 'John Doe', 'penjualan_kode' => 'PNJ001', 'penjualan_tanggal' => '2024-09-01 10:30:00'],
+            ['penjualan_id' => 2, 'user_id' => 1, 'pembeli' => 'Jane Smith', 'penjualan_kode' => 'PNJ002', 'penjualan_tanggal' => '2024-09-02 11:15:00'],
+            ['penjualan_id' => 3, 'user_id' => 2, 'pembeli' => 'Alice Johnson', 'penjualan_kode' => 'PNJ003', 'penjualan_tanggal' => '2024-09-03 12:00:00'],
+            ['penjualan_id' => 4, 'user_id' => 2, 'pembeli' => 'Bob Brown', 'penjualan_kode' => 'PNJ004', 'penjualan_tanggal' => '2024-09-04 13:45:00'],
+            ['penjualan_id' => 5, 'user_id' => 3, 'pembeli' => 'Charlie Davis', 'penjualan_kode' => 'PNJ005', 'penjualan_tanggal' => '2024-09-05 14:30:00'],
 
-            ['detail_id' => 4, 'penjualan_id' => 2, 'barang_id' => 4, 'harga' => 55000, 'jumlah' => 1],
-            ['detail_id' => 5, 'penjualan_id' => 2, 'barang_id' => 5, 'harga' => 25000, 'jumlah' => 2],
-            ['detail_id' => 6, 'penjualan_id' => 2, 'barang_id' => 6, 'harga' => 40000, 'jumlah' => 1],
-
-            ['detail_id' => 7, 'penjualan_id' => 3, 'barang_id' => 7, 'harga' => 35000, 'jumlah' => 2],
-            ['detail_id' => 8, 'penjualan_id' => 3, 'barang_id' => 8, 'harga' => 20000, 'jumlah' => 3],
-            ['detail_id' => 9, 'penjualan_id' => 3, 'barang_id' => 9, 'harga' => 60000, 'jumlah' => 1],
-
-            ['detail_id' => 10, 'penjualan_id' => 4, 'barang_id' => 10, 'harga' => 70000, 'jumlah' => 1],
-            ['detail_id' => 11, 'penjualan_id' => 4, 'barang_id' => 11, 'harga' => 25000, 'jumlah' => 2],
-            ['detail_id' => 12, 'penjualan_id' => 4, 'barang_id' => 12, 'harga' => 50000, 'jumlah' => 2],
-
-            ['detail_id' => 13, 'penjualan_id' => 5, 'barang_id' => 13, 'harga' => 42000, 'jumlah' => 3],
-            ['detail_id' => 14, 'penjualan_id' => 5, 'barang_id' => 14, 'harga' => 30000, 'jumlah' => 1],
-            ['detail_id' => 15, 'penjualan_id' => 5, 'barang_id' => 15, 'harga' => 55000, 'jumlah' => 2],
-
-            ['detail_id' => 16, 'penjualan_id' => 6, 'barang_id' => 1, 'harga' => 50000, 'jumlah' => 2],
-            ['detail_id' => 17, 'penjualan_id' => 6, 'barang_id' => 2, 'harga' => 30000, 'jumlah' => 1],
-            ['detail_id' => 18, 'penjualan_id' => 6, 'barang_id' => 3, 'harga' => 45000, 'jumlah' => 3],
-
-            ['detail_id' => 19, 'penjualan_id' => 7, 'barang_id' => 4, 'harga' => 55000, 'jumlah' => 1],
-            ['detail_id' => 20, 'penjualan_id' => 7, 'barang_id' => 5, 'harga' => 25000, 'jumlah' => 2],
-            ['detail_id' => 21, 'penjualan_id' => 7, 'barang_id' => 6, 'harga' => 40000, 'jumlah' => 1],
-
-            ['detail_id' => 22, 'penjualan_id' => 8, 'barang_id' => 7, 'harga' => 35000, 'jumlah' => 2],
-            ['detail_id' => 23, 'penjualan_id' => 8, 'barang_id' => 8, 'harga' => 20000, 'jumlah' => 3],
-            ['detail_id' => 24, 'penjualan_id' => 8, 'barang_id' => 9, 'harga' => 60000, 'jumlah' => 1],
-
-            ['detail_id' => 25, 'penjualan_id' => 9, 'barang_id' => 10, 'harga' => 70000, 'jumlah' => 1],
-            ['detail_id' => 26, 'penjualan_id' => 9, 'barang_id' => 11, 'harga' => 25000, 'jumlah' => 2],
-            ['detail_id' => 27, 'penjualan_id' => 9, 'barang_id' => 12, 'harga' => 50000, 'jumlah' => 2],
-
-            ['detail_id' => 28, 'penjualan_id' => 10, 'barang_id' => 13, 'harga' => 42000, 'jumlah' => 3],
-            ['detail_id' => 29, 'penjualan_id' => 10, 'barang_id' => 14, 'harga' => 30000, 'jumlah' => 1],
-            ['detail_id' => 30, 'penjualan_id' => 10, 'barang_id' => 15, 'harga' => 55000, 'jumlah' => 2],
+            ['penjualan_id' => 6, 'user_id' => 3, 'pembeli' => 'Emily Clark', 'penjualan_kode' => 'PNJ006', 'penjualan_tanggal' => '2024-09-06 15:00:00'],
+            ['penjualan_id' => 7, 'user_id' => 1, 'pembeli' => 'David Evans', 'penjualan_kode' => 'PNJ007', 'penjualan_tanggal' => '2024-09-07 16:20:00'],
+            ['penjualan_id' => 8, 'user_id' => 2, 'pembeli' => 'Sophia Green', 'penjualan_kode' => 'PNJ008', 'penjualan_tanggal' => '2024-09-08 17:10:00'],
+            ['penjualan_id' => 9, 'user_id' => 3, 'pembeli' => 'James Harris', 'penjualan_kode' => 'PNJ009', 'penjualan_tanggal' => '2024-09-09 18:05:00'],
+            ['penjualan_id' => 10, 'user_id' => 1, 'pembeli' => 'Olivia King', 'penjualan_kode' => 'PNJ010', 'penjualan_tanggal' => '2024-09-10 19:00:00'],
         ]);
     }
 }
