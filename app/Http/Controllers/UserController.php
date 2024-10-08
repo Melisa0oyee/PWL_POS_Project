@@ -75,13 +75,57 @@ class UserController extends Controller
         // $user = UserModel::where('username', 'manager9')->firstOrFail();
         // return view ('user', ['data' => $user]);
 
-        // Langkah 1 prak 2.3 - pertemuan 4
-        $user = UserModel::where('level_id', 2)->count();
-        dd($user);
-        return view ('user', ['data' => $user]);
+        // // Langkah 1 prak 2.3 - pertemuan 4
+        // $user = UserModel::where('level_id', 2)->count();
+        // dd($user);
+        // return view ('user', ['data' => $user]);
 
-        // Langkah 3 prak 2.3 - pertemuan 4
-        $user = UserModel::where('level_id', 2)->count();
-        return view ('user', ['data' => $user]);
+        // // Langkah 3 prak 2.3 - pertemuan 4
+        // $user = UserModel::where('level_id', 2)->count();
+        // return view ('user', ['data' => $user]);
+
+        // // Langkah 1 prak 2.4 - pertemuan 4
+        // $user = UserModel::firstOrCreate(
+        //     [
+        //         'username' => 'manager',
+        //         'nama' => 'Manager'
+        //     ],
+        // );
+        // return view('user', ['data' => $user]);
+
+        
+        // // Langkah 4 prak 2.4 - pertemuan 4
+        // $user = UserModel::firstOrCreate(
+        //     [
+        //         'username' => 'manager22',
+        //         'nama' => 'Manager Dua Dua',
+        //         'password' => Hash::make('12345'),
+        //         'level_id' => 2
+        //     ],
+        // );
+        // return view('user', ['data' => $user]);
+
+
+        // Langkah 6 prak 2.4 - pertemuan 4
+        // $user = UserModel::firstOrNew(
+        //     [
+        //         'username' => 'manager',
+        //         'nama' => 'Manager'
+        //     ],
+        // );
+        // return view('user', ['data' => $user]);
+
+
+         // Langkah 8 dan 10 prak 2.4 - pertemuan 4
+         $user = UserModel::firstOrNew(
+            [
+                'username' => 'manager33',
+                'nama' => 'Manager Tiga Tiga',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ],
+        );
+        $user->save();
+        return view('user', ['data' => $user]);
     }
 }
