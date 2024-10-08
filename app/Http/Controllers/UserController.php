@@ -23,6 +23,10 @@ class UserController extends Controller
         // ];
         // UserModel::insert($data); // tambahkan data ke tabel m_user
         
+        // // // coba akses model UserModel
+        // $user = UserModel::all(); // ambil semua data dari tabel m_user
+        // return view ('user', ['data' => $user]);
+
         // // tambah data user dengan Eloquent Model
         // $data = [
         //     'nama' => 'Pelanggan Pertama',
@@ -68,7 +72,16 @@ class UserController extends Controller
         // $user = UserModel::findOrFail(1);
         // return view ('user', ['data' => $user]);
 
-        $user = UserModel::where('username', 'manager9')->firstOrFail();
+        // $user = UserModel::where('username', 'manager9')->firstOrFail();
+        // return view ('user', ['data' => $user]);
+
+        // Langkah 1 prak 2.3 - pertemuan 4
+        $user = UserModel::where('level_id', 2)->count();
+        dd($user);
+        return view ('user', ['data' => $user]);
+
+        // Langkah 3 prak 2.3 - pertemuan 4
+        $user = UserModel::where('level_id', 2)->count();
         return view ('user', ['data' => $user]);
     }
 }
