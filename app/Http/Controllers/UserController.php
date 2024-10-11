@@ -176,11 +176,11 @@ class UserController extends Controller
     //}
 
      // LANGKAH 6 PRAKTIKUM 2.6 PERTEMUAN 4
-     public function index()
-     {
-        $user = UserModel::all();
-        return view('user', ['data' => $user]);  
-     }
+   //   public function index()
+   //   {
+   //      $user = UserModel::all();
+   //      return view('user', ['data' => $user]);  
+   //   }
      public function tambah()
      {
         return view('user_tambah');
@@ -222,5 +222,23 @@ class UserController extends Controller
       $user->delete();
       return redirect('/user');
     }
+
+
+   // PRAKTIKUM 2.7  - PERTEMUAN 4
+   // LANGKAH 2
+   //  public function index()
+   //  {
+   //    $user = UserModel::with('level')->get();
+   //    dd($user);
+   //  }
+
+    //LANGKAH 4
+    public function index()
+    {
+      $user = UserModel::with('level')->get();
+      return view('user', ['data' => $user]);
+    }
+
+    
 
 }
