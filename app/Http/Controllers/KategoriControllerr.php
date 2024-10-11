@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KategoriControllerr extends Controller
+class KategoriController extends Controller
 {
     public function index() 
     {
