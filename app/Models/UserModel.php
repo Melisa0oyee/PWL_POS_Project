@@ -13,7 +13,7 @@ class UserModel extends Model
 
     protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
     protected $primaryKey = 'user_id'; // Mendefinisikan primary key tabel yang digunakan
-
+    public $timestamps = false; // Sesuaikan jika tabel tidak menggunakan timestamps
     /**
  * @var array
  */
