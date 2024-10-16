@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,16 @@ use App\Http\Controllers\BarangController;
 // Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
 // Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
+Route::pattern('id', '[0-9]+'); // artinya ketika ada parameter {id}, maka harus berupa angka
+
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'postlogin']);
+Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::get('register', [AuthController::class, 'register']);
+Route::post('register', [AuthController::class, 'store']);
+
+Route::middleware(['auth'])->group(function() { // Semua route di bawah ini membutuhkan autentikasi
+
 Route:: get('/', [WelcomeController::class, 'index']);
 
 // TABEL USER
@@ -52,15 +63,15 @@ Route::group(['prefix' => 'user'], function() {
 });
 
 // TABEL LEVEL
-Route::group(['prefix' => 'level'], function () {
-    Route::get('/', [LevelController::class, 'index']);          // menampilkan halaman awal level
-    Route::post('/list', [LevelController::class, 'list']);      // menampilkan data level dalam bentuk json untuk datatables
-    Route::get('/create', [LevelController::class, 'create']);   // menampilkan halaman form tambah level
-    Route::post('/', [LevelController::class, 'store']);         // menyimpan data level baru
-    Route::get('/{id}', [LevelController::class, 'show']);       // menampilkan detail level
-    Route::get('/{id}/edit', [LevelController::class, 'edit']);  // menampilkan halaman form edit level
-    Route::put('/{id}', [LevelController::class, 'update']);     // menyimpan perubahan data level
-    Route::delete('/{id}', [LevelController::class, 'destroy']); // menghapus data level
+Route::middleware(['authorize:ADM'])->group (function () {
+    Route::get('/level', [LevelController::class, 'index']);          // menampilkan halaman awal level
+    Route::post('/level/list', [LevelController::class, 'list']);      // menampilkan data level dalam bentuk json untuk datatables
+    Route::get('/level/create', [LevelController::class, 'create']);   // menampilkan halaman form tambah level
+    Route::post('/level', [LevelController::class, 'store']);         // menyimpan data level baru
+    Route::get('/level/{id}', [LevelController::class, 'show']);       // menampilkan detail level
+    Route::get('/level/{id}/edit', [LevelController::class, 'edit']);  // menampilkan halaman form edit level
+    Route::put('/level/{id}', [LevelController::class, 'update']);     // menyimpan perubahan data level
+    Route::delete('/level/{id}', [LevelController::class, 'destroy']); // menghapus data level
 });
 
 // TABEL KATEGORI
@@ -97,5 +108,7 @@ Route::group(['prefix' => 'barang'], function () {
     Route::get('/{id}/edit', [BarangController::class, 'edit']);  // menampilkan halaman form edit supplier
     Route::put('/{id}', [BarangController::class, 'update']);     // menyimpan perubahan data supplier
     Route::delete('/{id}', [BarangController::class, 'destroy']); // menghapus data supplier
+});
+
 });
 ?>
