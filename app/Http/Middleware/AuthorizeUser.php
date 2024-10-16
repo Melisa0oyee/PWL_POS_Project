@@ -20,8 +20,10 @@ class AuthorizeUser
             return $next($request); // jika ada, maka lanjutkan request
         }
         // jika tidak punya role, maka tampilkan error 403
-        abort(403, 'Akses ditolak. Maaf, Anda tidak memiliki izin untuk mengakses halaman ini. 
-        Jika Anda merasa ini adalah kesalahan, silakan hubungi administrator untuk bantuan lebih lanjut.');
+        // abort(403, 'Akses ditolak. Maaf, Anda tidak memiliki izin untuk mengakses halaman ini. 
+        // Jika Anda merasa ini adalah kesalahan, silakan hubungi administrator untuk bantuan lebih lanjut.');
+
+        abort(403, 'Forbidden. Kamu tidak punya akses ke halaman ini');
 
     }
 }
