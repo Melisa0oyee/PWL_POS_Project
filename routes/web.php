@@ -87,7 +87,7 @@ Route::group(['prefix' => 'kategori'], function () {
 });
 
 // TABEL SUPPLIER
-Route::group(['prefix' => 'stok'], function () {
+Route::group(['prefix' => 'supplier'], function () {
     Route::get('/', [SupplierController::class, 'index']);          // menampilkan halaman awal supplier
     Route::post('/list', [SupplierController::class, 'list']);      // menampilkan data supplier dalam bentuk json untuk datatables
     Route::get('/create', [SupplierController::class, 'create']);   // menampilkan halaman form tambah supplier
@@ -118,6 +118,7 @@ Route::middleware(['authorize:ADM,MNG'])->group (function (){
     Route::get('/barang/import', [BarangController::class, 'import']);       // ajax form upload excel
     Route::post('/barang/import_ajax', [BarangController::class, 'import_ajax']); // ajax import excel
     Route::get('/barang/export_excel', [BarangController::class, 'export_excel']); // export excel
+    Route::get('/barang/export_pdf', [BarangController::class, 'export_pdf']); // export pdf
 });
 
 });

@@ -1,16 +1,19 @@
 @extends('layouts.template')
+
 @section('content')
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Daftar Barang</h3>
         <div class="card-tools">
+            {{-- Tombol untuk Import dan Export --}}
             <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-info">Import Barang</button>
-            <a href="{{ url('/barang/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-ecxel"></i>Export Barang</a>
+            <a href="{{ url('/barang/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i>Export Barang</a>
             <button onclick="modalAction('{{ url('/barang/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
         </div>
     </div>
+
     <div class="card-body">
-        <!-- Untuk Filter data -->
+        <!-- Filter data -->
         <div id="filter" class="form-horizontal filter-date p-2 border-bottom mb-2">
             <div class="row">
                 <div class="col-md-12">
@@ -19,8 +22,8 @@
                         <div class="col-md-3">
                             <select name="filter_kategori" class="form-control form-control-sm filter_kategori">
                                 <option value="">- Semua -</option>
-                                @foreach($kategori as $l)
-                                    <option value="{{ $l->kategori_id }}">{{ $l->kategori_nama }}</option>
+                                @foreach($kategori as $k) <!-- Pastikan $kategori didefinisikan di controller -->
+                                    <option value="{{ $k->kategori_id }}">{{ $k->kategori_nama }}</option>
                                 @endforeach
                             </select>
                             <small class="form-text text-muted">Kategori Barang</small>
@@ -55,6 +58,7 @@
 </div>
 
 <div id="myModal" class="modal fade animate shake" tabindex="-1" data-backdrop="static" data-keyboard="false" data-width="75%"></div>
+
 @endsection
 
 @push('js')
@@ -106,7 +110,7 @@
                     width: "10%",
                     orderable: true,
                     searchable: false,
-                    render: function(data, type, row) {
+                    render: function(data) {
                         return new Intl.NumberFormat('id-ID').format(data);
                     }
                 },
@@ -116,7 +120,7 @@
                     width: "10%",
                     orderable: true,
                     searchable: false,
-                    render: function(data, type, row) {
+                    render: function(data) {
                         return new Intl.NumberFormat('id-ID').format(data);
                     }
                 },
@@ -135,12 +139,6 @@
                     searchable: false
                 }
             ]
-        });
-
-        $('#table-barang_filter input').unbind().bind('keyup', function(e) {
-            if (e.keyCode == 13) { // Enter key
-                tableBarang.search(this.value).draw();
-            }
         });
 
         $('.filter_kategori').change(function() {
