@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\SupplierModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class SupplierController extends Controller
@@ -140,4 +143,47 @@ class SupplierController extends Controller
             return redirect('/supplier')->with('error', 'Data supplier gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
+
+    public function create_ajax()
+    {
+        $supplier = SupplierModel::select('supplier_id', 'supplier_nama')->get();
+        return view('supplier.create_ajax')->with('supplier', $supplier);
+    }
+
+    // Menyimpan data supplier baru melalui ajax
+    public function store_ajax(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'supplier_kode' => 'required|string|unique:m_supplier,supplier_kode',
+            'supplier_nama' => 'required|string|max:100',
+            'supplier_alamat' => 'required|string|max:255', // Tambahkan validasi untuk alamat
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'msgField' => $validator->errors(),
+                'message' => 'Validasi gagal, periksa input Anda.'
+            ]);
+        }
+
+        try {
+            SupplierModel::create([
+                'supplier_kode' => $request->supplier_kode,
+                'supplier_nama' => $request->supplier_nama,
+                'supplier_alamat' => $request->supplier_alamat, // Pastikan menyimpan alamat supplier
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data berhasil disimpan!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan saat menyimpan data.'
+            ]);
+        }
+    }
+
 }
