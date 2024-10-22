@@ -23,6 +23,13 @@
                 <a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a>
             </div>
             <div class="card-body">
+                <!-- Menampilkan pesan status -->
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                
                 <p class="login-box-msg">Sign in to start your session</p>
                 <form action="{{ url('login') }}" method="POST" id="form-login">
                     @csrf
@@ -60,7 +67,7 @@
 
                     <hr>
                     <div class="row">
-                        Don't have account?<a href="{{ url('register') }}">register</a>
+                        Don't have account?<a href="{{ url('register') }}"> register</a>
                     </div>
 
                 </form>

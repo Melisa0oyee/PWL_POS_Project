@@ -81,6 +81,6 @@ class AuthController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('login');
+        return redirect('login')->with('status', 'Anda telah berhasil logout.'); // Menambahkan flash message
     }
 }
