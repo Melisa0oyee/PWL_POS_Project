@@ -45,7 +45,8 @@ Route::middleware(['auth'])->group(function() { // Semua route di bawah ini memb
 Route:: get('/', [WelcomeController::class, 'index']);
 
 // TABEL USER
-Route::group(['prefix' => 'user'], function() {
+// Route::group(['prefix' => 'user'], function() {
+Route::middleware(['authorize:ADM'])->group(function() {
     Route::get('/', [UserController::class, 'index']);              // menampilkan halaman awal user
     Route::post('/list', [UserController::class, 'list']);          // menampilkan data user dalam bentuk json untuk datatables
     Route::get('/create', [UserController::class, 'create']);       // menampilkan halaman form tambah user
@@ -64,8 +65,9 @@ Route::group(['prefix' => 'user'], function() {
 
 // TABEL LEVEL
 Route::group(['prefix' => 'level'], function() {
+//Route::middleware(['authorize:ADM'])->group(function(){
     Route::get('/', [LevelController::class, 'index']);                // menampilkan halaman awal level
-    Route::post('/list', [LevelController::class, 'list']);            // menampilkan data level dalam bentuk json untuk datatables
+    Route::get('/list', [LevelController::class, 'list']);            // menampilkan data level dalam bentuk json untuk datatables
     Route::get('/create', [LevelController::class, 'create']);         // menampilkan halaman form tambah level
     Route::post('/', [LevelController::class, 'store']);               // menyimpan data level baru
     Route::get('/create_ajax', [LevelController::class, 'create_ajax']); // menampilkan halaman form tambah level Ajax

@@ -49,7 +49,7 @@ class LevelController extends Controller
             })
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah HTML
             ->make(true);
-    }
+        }
 
     // Menampilkan halaman form tambah level
     public function create()

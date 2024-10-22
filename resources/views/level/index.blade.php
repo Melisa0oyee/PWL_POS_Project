@@ -64,7 +64,7 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
                 ajax: {
                     "url": "{{ url('level/list') }}",
                     "dataType": "json",
-                    "type": "POST",
+                    "type": "GET",
                     "data": function(d){
                         d.level_id = $('#level_id').val();
                     }
