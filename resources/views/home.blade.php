@@ -8,7 +8,7 @@
 <body>
 
     <h1>Welcome to Our Homepage</h1>
-    <h2>Nur Melisa Makyatika</h2>
+    <h2>Owner Nur Melisa Makyatika</h2> <!-- Mengganti nama pemilik -->
     <p>Please choose a menu below:</p>
 
     <div class="menu">
