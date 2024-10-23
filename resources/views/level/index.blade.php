@@ -43,15 +43,21 @@
             </table>
         </div>
     </div>
-<!-- Modal -->
-<div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" 
-data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- Konten modal -->
+            </div>
+        </div>
+    </div>
+    
 @endsection
 @push('css')
 @endpush
 @push('js')
     <script>
          function modalAction(url = '') {
+            console.log('Modal URL:', url); // Debug
         $('#myModal').load(url, function() {
             $('#myModal').modal('show');
         });
