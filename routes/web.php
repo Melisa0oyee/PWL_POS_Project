@@ -67,11 +67,12 @@ Route::middleware(['auth'])->group(function () {
 //untuk M_LEVEL
 Route::middleware(['authorize:ADM'])->group(function(){ //semua route harus punya role adm baru bisa akses
     Route::get('/level', [LevelController::class, 'index']); //menampilkan halaman awal leevel
-    Route::post('/level/list',[LevelController::class,'list']);   //menampilkan data level dalam bentuk json
+    Route::get('/level/list',[LevelController::class,'list']);   //menampilkan data level dalam bentuk json
     Route::get('/level/create', [LevelController::class, 'create']);   // menampilkan halaman form tambah level
     Route::get('/level/create_ajax', [LevelController::class, 'create_ajax']); //Menampilkan halaman form tambah user Ajax
     Route::post('/level/ajax', [LevelController::class, 'store_ajax']); // Menyimpan data user baru Ajax
     Route::post('/level', [LevelController::class, 'store']);         // menyimpan data level baru
+    // Route::get('/level/{id}', [LevelController::class, 'show']);
     Route::get('/level/{id}/edit', [LevelController::class, 'edit']); // menampilkan halaman form edit level
     Route::put('/level/{id}', [LevelController::class, 'update']);     // menyimpan perubahan data level
     Route::get('/level/{id}/edit_ajax', [LevelController::class,'edit_ajax']); //menampilkan halaman form edit user ajax
@@ -90,7 +91,7 @@ Route::middleware(['authorize:ADM'])->group(function(){ //semua route harus puny
 // TABEL KATEGORI
 Route::middleware(['authorize:ADM,MNG,STF,CUS'])->group(function(){
     Route::get('/kategori', [KategoriController::class, 'index']); //menampilkan halaman awal leevel
-    Route::post('/kategori/list',[KategoriController::class,'list']);   //menampilkan data Kategori dalam bentuk json
+    Route::get('/kategori/list',[KategoriController::class,'list']);   //menampilkan data Kategori dalam bentuk json
     Route::get('/kategori/create', [KategoriController::class, 'create']);   // menampilkan halaman form tambah Kategori
     Route::get('/kategori/create_ajax', [KategoriController::class, 'create_ajax']); //Menampilkan halaman form tambah user Ajax
     Route::post('/kategori/ajax', [KategoriController::class, 'store_ajax']); // Menyimpan data user baru Ajax
@@ -160,9 +161,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile'); // Tambahkan ini
 });
 
+
+// stok
 Route::middleware(['authorize:ADM,MNG,STF,CUS'])->group(function(){
     Route::get('/stok', [StokController::class, 'index']);  // menampilkan halaman stok
-    Route::post('/stok/list', [StokController::class, 'list'] );    //menampilkan data stok dalam bentuk json datatables
+    Route::get('/stok/list', [StokController::class, 'list'] );    //menampilkan data stok dalam bentuk json datatables
     Route::get('/stok/create', [StokController::class, 'create']);
     Route::get('/stok/create_ajax', [StokController::class, 'create_ajax']); //Menampilkan halaman form tambah stok Ajax
     Route::post('/stok/ajax', [StokController::class, 'store_ajax']); // Menyimpan data stok baru Ajax

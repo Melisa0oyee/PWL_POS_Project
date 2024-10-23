@@ -31,7 +31,7 @@ class StokController extends Controller
 
         $activeMenu = 'stok'; //set menu yang sedang active
 
-        return view('stok.index_stok', [
+        return view('stok.index', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
             'barang' => $barang,
