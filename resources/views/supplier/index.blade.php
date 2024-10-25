@@ -4,7 +4,10 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('supplier/create') }}">Tambah</a>
+                <button onclick="modalAction('{{ url('/supplier/import_ajax') }}')" class="btn btn-info">Import Data Supplier</button>
+            <a href="{{ url('/supplier/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Supplier</a>
+            <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Supplier</a>
+                {{-- <a class="btn btn-sm btn-primary mt-1" href="{{ url('supplier/create') }}">Tambah</a> --}}
                 <button onclick="modalAction('{{ url('supplier/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
             </div>
         </div>
@@ -104,6 +107,16 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
             });
             $('#supplier_id').on('change', function(){
                 dataSupplier.ajax.reload();
+            });
+
+            $('#table-supplier_filter input').unbind().bind().on('keyup', function(e){
+                if(e.keyCode == 13){ // enter key
+                    tableSupplier.search(this.value).draw();
+                }
+            });
+            
+            $('.filter_supplier').change(function(){
+                tableSupplier.draw();
             });
         });
     </script>

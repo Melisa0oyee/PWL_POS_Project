@@ -4,7 +4,10 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a>
+                <button onclick="modalAction('{{ url('/kategori/import_ajax') }}')"  class="btn btn-sm btn-aqua">Import Barang</button>
+                <a href="{{ url('/kategori/export_pdf') }}" class="btn btn-warning"><i class="fa fa-filepdf"></i> Export Barang</a>
+                <a href="{{ url('/kategori/export_excel') }}" class="btn btn-primary"><i class="fa fa-fileexcel"></i> Export Kategori</a>
+                {{-- <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create') }}">Tambah</a> --}}
                 <button onclick="modalAction('{{ url('kategori/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
             </div>
         </div>
@@ -47,7 +50,19 @@
 <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" 
 data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
+
 @push('css')
+<style>
+    .btn-aqua {
+        background-color: #00c0ef; /* Warna aqua */
+        color: #fff; /* Warna teks putih */
+    }
+
+    .btn-aqua:hover {
+        background-color: #00b0e1; /* Warna aqua saat hover */
+        color: #fff; /* Warna teks putih saat hover */
+    }
+</style>
 @endpush
 @push('js')
     <script>
@@ -97,8 +112,18 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
                     }
                 ]
             });
-            $('#kategori_id').on('change', function(){
-                dataKategori.ajax.reload();
+            // $('#kategori_id').on('change', function(){
+            //     dataKategori.ajax.reload();
+            // });
+
+            $('#table-kategori_filter input').unbind().bind().on('keyup', function(e){
+                if(e.keyCode == 13){ // enter key
+                    tableKategori.search(this.value).draw();
+                }
+            });
+            
+            $('.filter_kategori').change(function(){
+                tableKategori.draw();
             });
         });
     </script>

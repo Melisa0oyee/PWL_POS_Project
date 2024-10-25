@@ -4,7 +4,10 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">Tambah</a>
+                {{-- <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">Tambah</a> --}}
+                <button onclick="modalAction('{{ url('/level/import_ajax') }}')" class="btn btn-info">Import Data Level</button>
+            <a href="{{ url('/level/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data Level</a>
+            <a href="{{ url('/level/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Level</a>
                 <button onclick="modalAction('{{ url('level/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
             </div>
         </div>
@@ -105,6 +108,16 @@
 
             $('#level_id').on('change', function(){
                 dataLevel.ajax.reload();
+            });
+
+            $('#table-level_filter input').unbind().bind().on('keyup', function(e){
+                if(e.keyCode == 13){ // enter key
+                    tablelevel.search(this.value).draw();
+                }
+            });
+            
+            $('.filter_level').change(function(){
+                tablelevel.draw();
             });
         });
     </script>

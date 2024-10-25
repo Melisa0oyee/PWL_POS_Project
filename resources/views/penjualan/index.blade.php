@@ -18,8 +18,7 @@
                 <div class="card-header">
                     <h3 class="card-title">{{ $page->title }}</h3>
                     <div class="card-tools">
-                        <button onclick="modalAction('{{ url('/penjualan/import') }}')" class="btn btn-info">Import
-                            Data</button>
+                        <button onclick="modalAction('{{ url('/penjualan/import') }}')" class="btn btn-info">Import Data</button>
                         <a href="{{ url('/penjualan/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i>Export Excel</a>
                         <a href="{{ url('/penjualan/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i>Export PDF</a>
                         <button onclick="modalAction('{{ url('/penjualan/create_ajax') }}')" class="btn btn-success">Tambah Data(Ajax)</button>
@@ -240,6 +239,16 @@
             });
             $('#barang_id').on('change', function() {
                 tableDetail.ajax.reload();
+            });
+
+            $('#table-barang_filter input').unbind().bind().on('keyup', function(e){
+                if(e.keyCode == 13){ // enter key
+                    tableBarang.search(this.value).draw();
+                }
+            });
+            
+            $('.filter_kategori').change(function(){
+                tableBarang.draw();
             });
         });
     </script>

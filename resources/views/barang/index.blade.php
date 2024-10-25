@@ -1,16 +1,17 @@
 @extends('layouts.template')
 @section('content')
 <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" 
-databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Daftar Barang</h3>
         <div class="card-tools">
             {{-- Tombol untuk Import dan Export --}}
-            <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-info">Import Barang</button>
-            <a href="{{ url('/barang/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i>Export Barang</a>
-            <a class="btn btn-sm btn-primary mt-1" href="{{ url('barang/create') }}">Tambah</a>
-            <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+            <button onclick="modalAction('{{ url('/barang/import_ajax') }}')" class="btn btn-sm btn-aqua">Import Barang</button>
+            <a href="{{ url('/barang/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Kategori</a>
+            {{-- <a class="btn btn-sm btn-primary mt-1" href="{{ url('barang/create') }}">Tambah Data</a> --}}
+            <a href="{{ url('/barang/export_excel') }}" class="btn btn-primary"><i class="fa fa-fileexcel"></i> Export Barang (Excel)</a>
+            <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Data (Ajax)</button>
         </div>
     </div>
 
@@ -24,7 +25,7 @@ databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true">
                         <div class="col-md-3">
                             <select name="filter_kategori" class="form-control form-control-sm filter_kategori">
                                 <option value="">- Semua -</option>
-                                @foreach($kategori as $k) <!-- Pastikan $kategori didefinisikan di controller -->
+                                @foreach($kategori as $k)
                                     <option value="{{ $k->kategori_id }}">{{ $k->kategori_nama }}</option>
                                 @endforeach
                             </select>
@@ -58,8 +59,21 @@ databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true">
         </table>
     </div>
 </div>
-
 @endsection
+
+@push('css')
+<style>
+    .btn-aqua {
+        background-color: #00c0ef; /* Warna aqua */
+        color: #fff; /* Warna teks putih */
+    }
+
+    .btn-aqua:hover {
+        background-color: #00b0e1; /* Warna aqua saat hover */
+        color: #fff; /* Warna teks putih saat hover */
+    }
+</style>
+@endpush
 
 @push('js')
 <script>
@@ -142,8 +156,20 @@ databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true">
             ]
         });
 
+        // Fitur pencarian menggunakan tombol enter
+        $('#table-barang_filter input').unbind().bind().on('keyup', function(e){
+            if(e.keyCode == 13){ // enter key
+                tableBarang.search(this.value).draw();
+            }
+        });
+
         $('.filter_kategori').change(function() {
             tableBarang.draw();
+        });
+
+        // Kode untuk membuka modal saat tombol import diklik
+        $(document).on('click', '#import-btn', function() {
+            $('#myModal').modal('show');
         });
     });
 </script>
