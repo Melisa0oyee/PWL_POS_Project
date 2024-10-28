@@ -56,6 +56,7 @@
                         success: function(response) {
                             if (response.status) {
                                 $('#myModal').modal('hide');
+                                $('#myModal').modal('show');
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Berhasil',
@@ -74,6 +75,10 @@
                                 });
                             }
                         }
+                        error: function(xhr) {
+                            console.error("Error: ", xhr.status, xhr.statusText, xhr.responseText);
+                        }
+
                     });
                     return false;
                 },

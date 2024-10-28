@@ -3,11 +3,13 @@ namespace App\Http\Controllers;
 use App\Models\BarangModel;
 use App\Models\PenjualanDetailModel;
 use App\Models\PenjualanModel;
+use App\Models\UserModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yajra\DataTables\Facades\DataTables;
+
 class DetailController extends Controller
 {
     public function index()
@@ -62,12 +64,16 @@ class DetailController extends Controller
     }
     public function create_ajax()
     {
-        $barang = BarangModel::select('barang_id', 'barang_nama')->get();
-        $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get();
-        return view('detail.create_ajax')
-            ->with('barang', $barang)
-            ->with('penjualan', $penjualan);
+        $user = UserModel::select('user_id', 'username')->get(); // Ambil data user
+        $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get(); // Ambil data penjualan
+        $barang = BarangModel::select('barang_id', 'barang_nama')->get(); // Ambil data barang
+        
+        return view('detail.create_ajax') // Pastikan untuk menggunakan nama view yang benar
+            ->with('user', $user)
+            ->with('penjualan', $penjualan)
+            ->with('barang', $barang);
     }
+
     public function store_ajax(Request $request)
     {
         // cek apakah request berupa ajax

@@ -25,7 +25,7 @@ Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postlogin']);
 Route::get('register',[AuthController::class,'register']);
 Route::post('register',[AuthController::class,'store']);
-Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -155,6 +155,7 @@ Route::middleware(['authorize:ADM,MNG,STF,CUS'])->group(function(){
     Route::get('/barang/export_excel', [BarangController::class, 'export_excel']); //export_excel
     Route::get('/barang/export_pdf', [BarangController::class, 'export_pdf']); //export_pdf
     Route::delete('/barang/{id}', [BarangController::class, 'destroy']); // menghapus data Supplier
+    Route::post('/barang/harga', [BarangController::class, 'getHargaBarang']);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -201,6 +202,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
         Route::get('/penjualan/{id}/delete_ajax', [PenjualanController::class, 'confirm_ajax']);
         Route::delete('/penjualan/{id}/delete_ajax', [PenjualanController::class, 'delete_ajax']);
         Route::delete('/penjualan/{id}', [PenjualanController::class, 'destroy']); // menghapus data stok
+        
 });
 Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
     Route::group(['prefix' => 'detail'], function () {

@@ -12,7 +12,7 @@
                 </div>
             @else
                 <div class="d-flex align-items-start mb-4">
-                    <img src="{{ asset($user->avatar ? 'gambar/' . $user->avatar : 'gambar/profil-pic.png') }}" class="img-circle elevation-2 me-4" alt="User Image" width="150" height="150">
+                    <img src="{{ asset($user->avatar ? 'gambar/' . $user->avatar : 'gambar/profile_1.png') }}" class="img-circle elevation-2 me-4" alt="User Image" width="150" height="150">
                     <div>
                         <h5 class="mt-0">Data Pengguna</h5>
                         <div class="d-flex mb-3">

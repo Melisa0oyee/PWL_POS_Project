@@ -77,10 +77,13 @@ class PenjualanController extends Controller
 
     public function create_ajax()
     {
-        $user = UserModel::select('user_id', 'username')->get();
+        $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get(); // Mengambil data penjualan
+        $barang = BarangModel::select('barang_id', 'barang_nama')->get(); // Mengambil data barang
         return view('penjualan.create_ajax')
-            ->with('user', $user);
+            ->with('penjualan', $penjualan)
+            ->with('barang', $barang);
     }
+
     public function store_ajax(Request $request)
     {
         // cek apakah request berupa ajax

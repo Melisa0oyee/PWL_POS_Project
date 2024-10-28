@@ -652,5 +652,18 @@ class UserController extends Controller
 
        return $pdf->download('Data User '.date('Y-m-d H:i:s').'.pdf');
    }
+
+   public function show_ajax(String $id){
+    $user = UserModel::find($id);
+
+    if (!$user){
+        return response()->json([
+            'status' => false,
+            'message' => 'Data user tidak ditemukan'
+        ]);
+    }
+
+    return view('user.show_ajax', ['user' => $user]);
+}
    
 }

@@ -38,9 +38,9 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Supplier ID</th>
-                        <th>Barang ID</th>
-                        <th>User ID</th>
+                        <th>Nama Supplier</th>
+                        <th>Nama Barang</th>
+                        <th>Nama User</th>
                         <th>Tanggal Stok</th>
                         <th>Jumlah Stok</th>
                         <th>Aksi</th>
@@ -72,7 +72,7 @@
                     "dataType": "json",
                     "type": "GET",
                     "data": function(d) {
-                        d.supplier_id = $('#stok_filter').val();
+                        d.supplier_nama = $('#stok_filter').val();
                     }
                 },
                 columns: [
@@ -83,19 +83,19 @@
                         searchable: false
                     },
                     {
-                        data: "supplier_id",
+                        data: "supplier_nama",
                         className: "",
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: "barang_id",
+                        data: "barang_nama",
                         className: "",
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: "user_id",
+                        data: "user_nama",
                         className: "",
                         orderable: true,
                         searchable: true

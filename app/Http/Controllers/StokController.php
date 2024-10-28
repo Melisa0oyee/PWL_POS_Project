@@ -77,11 +77,14 @@ class StokController extends Controller
             ->make(true);
     }
 
-    public function show_ajax($id)
+    public function show_ajax($nama)
     {
-        // Mencari data stok berdasarkan ID
+        // Mencari data stok berdasarkan nama
         $stok = StokModel::with(['supplier', 'barang', 'user']) // Pastikan relasi ini ada di model Stok
-                    ->find($id);
+        ->whereHas('barang', function($query) use ($nama) {
+            $query->where('barang_nama', 'like', '%' . $nama . '%');
+        })
+        ->first();
 
         // Mengembalikan tampilan dengan data stok
         if ($stok) {
@@ -370,5 +373,7 @@ class StokController extends Controller
         // Mengembalikan hasil PDF dalam bentuk stream (langsung ditampilkan)
         return $pdf->stream('Data Stok Barang ' . date('Y-m-d H:i:s') . '.pdf');
     }
+
+    
 
 }

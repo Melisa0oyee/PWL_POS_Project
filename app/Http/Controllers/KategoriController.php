@@ -405,4 +405,17 @@ class KategoriController extends Controller
         return $pdf->stream('Data Kategori' . date('Y-m-d H:i:s') . '.pdf');
     }
 
+    public function show_ajax(String $id){
+        $kategori = KategoriModel::find($id);
+    
+        if (!$kategori){
+            return response()->json([
+                'status' => false,
+                'message' => 'Data kategori tidak ditemukan'
+            ]);
+        }
+    
+        return view('kategori.show_ajax', ['user' => $kategori]);
+    }
+
 }

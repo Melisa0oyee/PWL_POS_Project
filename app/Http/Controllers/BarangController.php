@@ -412,4 +412,28 @@ class BarangController extends Controller
         $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url $pdf->render();
         return $pdf->stream('Data Barang' . date('Y-m-d H:i:s') . '.pdf');
     }
+
+    public function show_ajax(String $id){
+        $barang = BarangModel::find($id);
+    
+        if (!$barang){
+            return response()->json([
+                'status' => false,
+                'message' => 'Data barang tidak ditemukan'
+            ]);
+        }
+    
+        return view('barang.show_ajax', ['user' => $barang]);
+    }
+
+    public function getHargaBarang(Request $request)
+    {
+        $barang = BarangModel::find($request->barang_id);
+        if ($barang) {
+            return response()->json(['status' => true, 'harga' => $barang->harga_jual]);
+        }
+        return response()->json(['status' => false, 'message' => 'Barang tidak ditemukan']);
+    }
+
+    
 }

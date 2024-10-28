@@ -110,6 +110,19 @@ class LevelController extends Controller
         return view('level.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
+    public function show_ajax(String $id){
+        $level = LevelModel::find($id);
+
+        if (!$level){
+            return response()->json([
+                'status' => false,
+                'message' => 'Data level tidak ditemukan'
+            ]);
+        }
+
+        return view('level.show_ajax', ['level' => $level]);
+    }
+
     // Menampilkan halaman form edit level
     public function edit(string $id)
     {
@@ -299,6 +312,11 @@ class LevelController extends Controller
             }
         }
         return redirect('/');
+    }
+
+    public function import()
+    {
+        return view('penjualan.import');
     }
 
     public function import_ajax(Request $request)
