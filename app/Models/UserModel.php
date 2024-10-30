@@ -7,11 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMOne;
 use Illuminate\Foundation\Auth\User as Authenticatable; // implementasi class Authenticatable
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class UserModel extends Authenticatable
+class UserModel extends Authenticatable implements JWTSubject
 {
     use HasFactory;
 
+
+public function getJWTIdentifier()
+{
+    return $this->getKey();
+}
+
+public function getJWTCustomClaims()
+{
+    return [];
+}
 //     protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
 //     protected $primaryKey = 'user_id'; // Mendefinisikan primary key tabel yang digunakan
 //     public $timestamps = false; // Sesuaikan jika tabel tidak menggunakan timestamps
@@ -26,7 +37,6 @@ class UserModel extends Authenticatable
 //     {
 //         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
 //     }
-
 
 protected $table = 'm_user';        // Mendefinisikan nama tabel yang digunakan oleh model ini
 protected $primaryKey = 'user_id';  // Mendefinisikan primary key dari tabel yang digunakan
