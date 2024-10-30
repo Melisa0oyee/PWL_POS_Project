@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/user/export_excel', [UserController::class, 'export_excel']); //export_excel
             Route::get('/user/export_pdf', [UserController::class, 'export_pdf']); //export_pdf
             Route::delete('/user/{id}', [UserController::class, 'destroy']);     //mengahpus data user
+            Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 
         });
 
@@ -63,6 +64,16 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/profil/{id}/edit_ajax', [ProfilController::class, 'edit_ajax']);
             Route::put('/profil/{id}/update_ajax', [ProfilController::class, 'update_ajax']);
         });
+
+
+// PROFIL
+// Route::middleware(['authorize:ADM,MNG,STF,CUS'])->group(function(){
+//     Route::get('/profile', [ProfileController::class, 'index']);
+//     Route::get('/profile/{id}/edit_ajax', [ProfileController::class, 'edit_ajax']);
+//     Route::put('/profile/{id}/update_ajax', [ProfileController::class, 'update_ajax']);
+//     Route::get('/profile/{id}/edit_foto', [ProfileController::class, 'edit_foto']);
+//     Route::put('/profile/{id}/update_foto', [ProfileController::class, 'update_foto']);
+// });
 
 //untuk M_LEVEL
 Route::middleware(['authorize:ADM'])->group(function(){ //semua route harus punya role adm baru bisa akses

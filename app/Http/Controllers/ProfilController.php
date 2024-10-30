@@ -39,68 +39,6 @@ class ProfilController extends Controller
     // Menyimpan perubahan data user dengan AJAX termasuk file gambar
     public function update_ajax(Request $request, $id)
     {
-        // // Periksa jika request berasal dari AJAX atau JSON
-        // if ($request->ajax() || $request->wantsJson()) {
-        //     $rules = [
-        //         'level_id' => 'required|integer',
-        //         'username' => 'required|max:20|unique:m_user,username,' . $id . ',user_id',
-        //         'nama' => 'required|max:100',
-        //         'password' => 'nullable|min:5|max:20',
-        //         'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Avatar tidak wajib
-        //     ];
-        //     // Validator untuk validasi data yang dikirim
-        //     $validator = Validator::make($request->all(), $rules);
-        //     if ($validator->fails()) {
-        //         return response()->json([
-        //             'status' => false, // Respon JSON, true: berhasil, false: gagal
-        //             'message' => 'Validasi gagal.',
-        //             'msgField' => $validator->errors(), // Menunjukkan field mana yang error
-        //         ]);
-        //     }
-        //     // Cari user berdasarkan ID
-        //     $user = UserModel::find($id);
-        //     if ($user) {
-        //         // Jika password tidak diisi, hapus dari request agar tidak di-update
-        //         if (!$request->filled('password')) {
-        //             $request->request->remove('password');
-        //         }
-        //         // if (!$request->filled('avatar')) {
-        //         //     $request->request->remove('avatar');
-        //         // }
-        //         if ($request->hasFile('avatar')) {
-        //             $fileName = 'profile_' . Auth::user()->user_id . '.' . $request->avatar->getClientOriginalExtension();
-
-        //             // Check if an existing profile picture exists and delete it
-        //             $oldFile = public_path('gambar/'. $fileName);
-        //             if (Storage::disk('public')->exists($oldFile)) {
-        //                 Storage::disk('public')->delete($oldFile);
-        //             }
-
-        //             $request->avatar->move(public_path('gambar'), $fileName);
-        //         } else {
-        //             $fileName = 'profil-pic.png'; // default avatar
-        //         }
-        //         UserModel::find($id)->update([
-        //             'username' => $request->username,
-        //             'nama' => $request->nama,
-        //             'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
-        //             'level_id' => $request->level_id,
-        //             'avatar' => $fileName
-        //         ]);
-        //         return response()->json([
-        //             'status' => true,
-        //             'message' => 'Data berhasil diupdate',
-        //         ]);
-        //     } else {
-        //         return response()->json([
-        //             'status' => false,
-        //             'message' => 'Data tidak ditemukan',
-        //         ]);
-        //     }
-        // }
-        // return redirect('/');
-
-        
     if ($request->ajax() || $request->wantsJson()) {
         $rules = [
             'level_id' => 'required|integer',
@@ -109,9 +47,9 @@ class ProfilController extends Controller
             'password' => 'nullable|min:5|max:20',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
@@ -119,25 +57,23 @@ class ProfilController extends Controller
                 'msgField' => $validator->errors(),
             ]);
         }
-        
+
         $user = UserModel::find($id);
-        
+
         if ($user) {
             if (!$request->filled('password')) {
                 $request->request->remove('password');
             }
 
-            $fileName = $user->avatar; // Default ke avatar lama
-            
+            $fileName = $user->avatar;
+
             if ($request->hasFile('avatar')) {
                 $fileName = 'profile_' . Auth::user()->user_id . '.' . $request->avatar->getClientOriginalExtension();
                 
-                // Hapus file avatar lama jika ada
-                if (file_exists(public_path('gambar/' . $user->avatar))) {
+                if (file_exists(public_path('gambar/' . $user->avatar)) && $user->avatar) {
                     unlink(public_path('gambar/' . $user->avatar));
                 }
 
-                // Simpan file baru
                 $request->avatar->move(public_path('gambar'), $fileName);
             }
 
@@ -162,7 +98,6 @@ class ProfilController extends Controller
     }
 
     return redirect('/');
+}
 
-
-    }
 }
