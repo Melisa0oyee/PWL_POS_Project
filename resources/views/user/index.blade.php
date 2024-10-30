@@ -8,7 +8,7 @@
     <div class="card-header">
         <h3 class="card-title">{{ $page->title }}</h3>
         <div class="card-tools">
-            <button onclick="modalAction('{{ url('/user/import_ajax') }}')" class="btn btn-info">Import Data User</button>
+            <button onclick="modalAction('{{ url('/user/import') }}')" class="btn btn-info">Import Data User</button>
             <a href="{{ url('/user/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export Data User</a>
             <a href="{{ url('/user/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export User</a>
             <button onclick="modalAction('{{ url('user/create_ajax') }}')" class="btn btn-success">Tambah</button>
@@ -79,7 +79,7 @@ data-keyboard="false" data-width="75%" aria-hidden="true"></div>
             ajax: {
                 "url": "{{ url('user/list') }}",
                 "dataType": "json",
-                "type": "POST",
+                "type": "GET",
                 "data": function(d) {
                     d.level_id = $('#level_id').val();
                 }

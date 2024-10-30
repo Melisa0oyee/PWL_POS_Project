@@ -7,7 +7,7 @@ data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"
         <h3 class="card-title">Daftar Barang</h3>
         <div class="card-tools">
             {{-- Tombol untuk Import dan Export --}}
-            <button onclick="modalAction('{{ url('/barang/import_ajax') }}')" class="btn btn-sm btn-aqua">Import Barang</button>
+            <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-sm btn-aqua">Import Barang</button>
             <a href="{{ url('/barang/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export Kategori</a>
             {{-- <a class="btn btn-sm btn-primary mt-1" href="{{ url('barang/create') }}">Tambah Data</a> --}}
             <a href="{{ url('/barang/export_excel') }}" class="btn btn-primary"><i class="fa fa-fileexcel"></i> Export Barang (Excel)</a>

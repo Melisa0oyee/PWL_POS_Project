@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::middleware(['authorize:ADM'])->group(function(){
             Route::get('/user', [UserController::class, 'index']);  // menampilkan halaman user
-            Route::post('/user/list', [UserController::class, 'list'] );    //menampilkan data user dalam bentuk json datatables
+            Route::get('/user/list', [UserController::class, 'list'] );    //menampilkan data user dalam bentuk json datatables
             Route::get('/user/create', [UserController::class, 'create']);  //menampilkan halaman tambah user
             Route::get('/user/create_ajax', [UserController::class, 'create_ajax']); //Menampilkan halaman form tambah user Ajax
             Route::post('/user/ajax', [UserController::class, 'store_ajax']); // Menyimpan data user baru Ajax
@@ -82,7 +82,7 @@ Route::middleware(['authorize:ADM'])->group(function(){ //semua route harus puny
     Route::get('/level/{id}/show_ajax', [LevelController::class, 'show_ajax']); // menampilkan detail level
     Route::get('/barang/{id}/show',[LevelController::class,'show']);
     Route::get('/level/import', [LevelController::class, 'import']); //ajax form upload excel
-    Route::post('/level/import_ajax', [LevelController::class, 'import_ajax']); //ajax form upload excel
+    Route::post('/level/import_ajax', [LevelController::class, 'import_ajax'])->name('user.import_ajax');; //ajax form upload excel
     Route::get('/level/export_excel', [LevelController::class, 'export_excel']); //export_excel
     Route::get('/level/export_pdf', [LevelController::class, 'export_pdf']); //export_pdf
     Route::delete('/level/{id}', [LevelController::class, 'destroy']); // menghapus data level

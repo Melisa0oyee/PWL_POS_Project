@@ -62,14 +62,23 @@ class DetailController extends Controller
         $activeMenu = 'detail'; // set menu yang sedang aktif
         return view('detail.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'detail' => $detail, 'activeMenu' => $activeMenu]);
     }
+    // public function create_ajax()
+    // {
+    //     $user = UserModel::select('user_id', 'username')->get(); // Ambil data user
+    //     $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get(); // Ambil data penjualan
+    //     $barang = BarangModel::select('barang_id', 'barang_nama')->get(); // Ambil data barang
+        
+    //     return view('detail.create_ajax') // Pastikan untuk menggunakan nama view yang benar
+    //         ->with('user', $user)
+    //         ->with('penjualan', $penjualan)
+    //         ->with('barang', $barang);
+    // }
+
     public function create_ajax()
     {
-        $user = UserModel::select('user_id', 'username')->get(); // Ambil data user
-        $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get(); // Ambil data penjualan
-        $barang = BarangModel::select('barang_id', 'barang_nama')->get(); // Ambil data barang
-        
-        return view('detail.create_ajax') // Pastikan untuk menggunakan nama view yang benar
-            ->with('user', $user)
+        $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get(); // Mengambil data penjualan
+        $barang = BarangModel::select('barang_id', 'barang_nama')->get(); // Mengambil data barang
+        return view('penjualan.create_ajax')
             ->with('penjualan', $penjualan)
             ->with('barang', $barang);
     }

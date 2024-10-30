@@ -58,6 +58,15 @@ class StokController extends Controller
         // Return data untuk DataTables
         return DataTables::of($stoks)
             ->addIndexColumn() // menambahkan kolom index / nomor urut
+            ->addColumn('supplier_nama', function ($stok) {
+                return $stok->supplier ? $stok->supplier->supplier_nama : '-';
+            })
+            ->addColumn('barang_nama', function ($stok) {
+                return $stok->barang ? $stok->barang->barang_nama : '-';
+            })
+            ->addColumn('user_nama', function ($stok) {
+                return $stok->user ? $stok->user->nama : '-';
+            })
             ->addColumn('aksi', function ($stok) {
                 // Menambahkan kolom aksi untuk edit, detail, dan hapus
                 // $btn = '<a href="' . url('/stok/' . $stok->stok_id) . '" class="btn btn-info btn-sm">Detail</a> ';

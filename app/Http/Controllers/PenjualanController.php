@@ -77,13 +77,10 @@ class PenjualanController extends Controller
 
     public function create_ajax()
     {
-        $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get(); // Mengambil data penjualan
-        $barang = BarangModel::select('barang_id', 'barang_nama')->get(); // Mengambil data barang
+        $user = UserModel::select('user_id', 'username')->get();
         return view('penjualan.create_ajax')
-            ->with('penjualan', $penjualan)
-            ->with('barang', $barang);
+            ->with('user', $user);
     }
-
     public function store_ajax(Request $request)
     {
         // cek apakah request berupa ajax
@@ -180,6 +177,7 @@ class PenjualanController extends Controller
         }
         return redirect('/');
     }
+    
     public function import()
     {
         return view('penjualan.import');
@@ -235,6 +233,7 @@ class PenjualanController extends Controller
         }
         return redirect('/');
     }
+
     public function export_excel()
     {
         // ambil data barang yang akan di export

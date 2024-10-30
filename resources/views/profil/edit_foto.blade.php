@@ -150,6 +150,7 @@
                             }
                         },
                         error: function(xhr, status, error) {
+                            console.error(textStatus, errorThrown); // untuk debugging
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',

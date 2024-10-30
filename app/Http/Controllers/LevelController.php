@@ -12,6 +12,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 
 class LevelController extends Controller
@@ -316,7 +317,7 @@ class LevelController extends Controller
 
     public function import()
     {
-        return view('penjualan.import');
+        return view('level.import');
     }
 
     public function import_ajax(Request $request)
@@ -327,6 +328,7 @@ class LevelController extends Controller
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
+                Log::error('Validasi Gagal', $validator->errors()->toArray());
                 return response()->json([
                     'status'   => false,
                     'message'  => 'Validasi Gagal',
