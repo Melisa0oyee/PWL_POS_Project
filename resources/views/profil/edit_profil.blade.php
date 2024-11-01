@@ -76,6 +76,7 @@
             </div>
         </div>
     </form>
+
     @push('js')
     <script>
         $(document).ready(function() {
@@ -87,6 +88,7 @@
                 }
                 reader.readAsDataURL(this.files[0]);
             });
+
             $("#form-edit").validate({
                 rules: {
                     level_id: {
@@ -113,6 +115,7 @@
                 },
                 submitHandler: function(form) {
                     var formData = new FormData(form); // Gunakan FormData untuk file upload
+
                     $.ajax({
                         url: form.action,
                         type: form.method,
@@ -142,6 +145,7 @@
                                 $.each(response.msgField, function(prefix, val) {
                                     $('#error-' + prefix).text(val[0]);
                                 });
+
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Terjadi Kesalahan',
