@@ -76,12 +76,13 @@ class DetailController extends Controller
 
     public function create_ajax()
     {
-        $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get(); // Mengambil data penjualan
-        $barang = BarangModel::select('barang_id', 'barang_nama')->get(); // Mengambil data barang
-        return view('penjualan.create_ajax')
-            ->with('penjualan', $penjualan)
-            ->with('barang', $barang);
+        $barang = BarangModel::select('barang_id', 'barang_nama')->get();
+        $penjualan = PenjualanModel::select('penjualan_id', 'penjualan_kode')->get();
+        return view('detail.create_ajax')
+            ->with('barang', $barang)
+            ->with('penjualan', $penjualan);
     }
+
 
     public function store_ajax(Request $request)
     {
@@ -287,4 +288,14 @@ class DetailController extends Controller
         $pdf->setOption("isRemoteEnabled", true); // set true jika ada gambar dari url $pdf->render();
         return $pdf->stream('Data Detail Penjualan ' . date('Y-m-d H:i:s') . '.pdf');
     }
+
+    public function getHargaBarang(Request $request)
+    {
+        $barang = BarangModel::find($request->barang_id);
+        if ($barang) {
+            return response()->json(['status' => true, 'harga' => $barang->harga_jual]);
+        }
+        return response()->json(['status' => false, 'message' => 'Barang tidak ditemukan']);
+    }
+
 }
